@@ -160,9 +160,11 @@ char KeyFile[] = "key/client.key";
 
 > If Using Manmatha Sir's Program 
 > In Client Side function `SSL_CTX* InitCTX(void)` 
+>
 > Replace with `method = TLS_client_method();`
 >
 > In Server Side function `SSL_CTX* InitServerCTX(void)`
+>
 > Replace with `method = TLS_server_method();`
 >
 > *Note : I have updated majority part of Manmatha Sir's Code and found out it worked *successfully* so *NO* need to make any extra changes*
@@ -231,9 +233,11 @@ gcc -o Mserver MULTI_CLIENT_OPENSSL.c -lssl -lcrypto
 
 > If Using Manmatha Sir's Program 
 > In Client Side function `SSL_CTX* InitCTX(void)` 
+>
 > Replace with `method = SSLv23_server_method();`
 >
 > In Server Side function `SSL_CTX* InitServerCTX(void)`
+>
 > Replace with `method = SSLv23_server_method();`
 >
 > *Note : I have updated majority part of Manmatha Sir's Code and found out it worked *successfully* so *NO* need to make any extra changes*
