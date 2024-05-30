@@ -15,7 +15,7 @@ I have pre-loaded the program with my Certificates so one can just run the progr
 
 ## Install OpenSSL
 Check for your [OpenSSL](https://www.openssl.org/) Version : 
-```openssl version```
+``` openssl version ```
 
 If not present then install it.
 ```sudo apt-get install openssl```
