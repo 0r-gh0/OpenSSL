@@ -1,0 +1,127 @@
+TO RUN THE OPENSSL CLIENT AND SERVER SETUP DO THE FOLLOWING STEPS : 
+
+CHECK FOR OPENSSL VERSION : 
+openssl version
+
+If not present then install it.
+
+Next Generate the Certificate Authority (CA) Certificate
+openssl genpkey -algorithm RSA -out ca.key
+
+Create the CA private key
+openssl req -x509 -new -nodes -key ca.key -sha256 -days 1024 -out ca.crt
+
+You'll be prompted to enter information about your CA (country, state, organization, etc.).
+
+Country Name (2 letter code) [AU]:IN
+State or Province Name (full name) [Some-State]:WB
+Locality Name (eg, city) []:KOL
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:ISIK
+Organizational Unit Name (eg, section) []:CrS
+Common Name (e.g. server FQDN or YOUR name) []:ARGHA
+Email Address []:arghasardar14@gmail.com
+
+Generate the Server Certificate
+
+Generate the Server Private Key
+openssl genpkey -algorithm RSA -out server.key
+
+Create a certificate signing request (CSR)
+openssl req -new -key server.key -out server.csr
+
+Country Name (2 letter code) [AU]:IN
+State or Province Name (full name) [Some-State]:WB
+Locality Name (eg, city) []:KOL
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:ISIK
+Organizational Unit Name (eg, section) []:CrS
+Common Name (e.g. server FQDN or YOUR name) []:ARGHA
+Email Address []:arghasardar14@gmail.com
+
+Please enter the following 'extra' attributes
+to be sent with your certificate request
+A challenge password []:ARGHA123
+An optional company name []:ISIK
+
+Sign the server CSR with the CA certificate
+openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt -days 500 -sha256
+
+It Will Show
+Certificate request self-signature ok
+subject=C=IN, ST=WB, L=KOL, O=ISIK, OU=CrS, CN=ARGHA, emailAddress=arghasardar14@gmail.com
+
+
+Generate the Client Certificate
+Generate the client private key
+openssl genpkey -algorithm RSA -out client.key
+
+Create a certificate signing request
+openssl req -new -key client.key -out client.csr
+
+Country Name (2 letter code) [AU]:IN
+State or Province Name (full name) [Some-State]:WB
+Locality Name (eg, city) []:KOL
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:ISIK
+Organizational Unit Name (eg, section) []:CrS
+Common Name (e.g. server FQDN or YOUR name) []:ARGHA
+Email Address []:arghasardar14@gmail.com
+
+Please enter the following 'extra' attributes
+to be sent with your certificate request
+A challenge password []:ARGHA123
+An optional company name []:ISIK
+
+Sign the Client CSR with the CA certificate
+openssl x509 -req -in client.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out client.crt -days 500 -sha256
+
+It Will Show this
+Certificate request self-signature ok
+subject=C=IN, ST=WB, L=KOL, O=ISIK, OU=CrS, CN=ARGHA, emailAddress=arghasardar14@gmail.com
+
+
+Create a directory to organize the certificates
+mkdir -p key
+mv ca.crt key/
+mv server.crt key/certificate.crt
+mv server.key key/private_key.pem
+mv client.crt key/
+mv client.key key/
+
+Update your Codes
+
+Server Side
+char CertFile[] = "key/certificate.crt";
+char KeyFile[] = "key/private_key.pem";
+
+Client Side
+char CertFile[] = "key/client.crt";
+char KeyFile[] = "key/client.key";
+
+CHECK IF THIS IS INSTALLED
+sudo apt install libssl-dev
+
+gcc -o client CLIENT_SSL.c -lssl -lcrypto
+gcc -o server SERVER_SSL.c -lssl -lcrypto
+
+NOTE : SSLv3 Has been depreciated
+This Line :  method = SSLv3_client_method(); OR SSLv3_client_method();
+
+In Client Side function SSL_CTX* InitCTX(void) Replace with 
+method = TLS_client_method();
+
+In Server Side function SSL_CTX* InitServerCTX(void) Replace with 
+method = TLS_server_method();
+
+Enter the Admin Mode
+sudo su 
+
+Compile the Files 
+
+gcc -o client CLIENT_SSL.c -lssl -lcrypto
+gcc -o server SERVER_SSL.c -lssl -lcrypto
+
+Execute the Files
+
+./client
+./server
+
+
