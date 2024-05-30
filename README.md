@@ -229,7 +229,7 @@ gcc -o Mserver MULTI_CLIENT_OPENSSL.c -lssl -lcrypto
 
 **NOTE : SSLv3 Has been depreciated** 
 
-*This Line :  `method = SSLv3_client_method()`; OR `SSLv3_client_method();`*
+*This Line :  `method = SSLv3_client_method();` OR `SSLv3_client_method();`*
 
 > If Using Manmatha Sir's Program 
 > In Client Side function `SSL_CTX* InitCTX(void)` 
