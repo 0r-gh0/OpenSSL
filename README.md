@@ -2,7 +2,7 @@
 Scroll down the Manual for detailed instructions to Run the Program. 
 
 ## SETUP
-The Programs are pre-loaded with the Certificates made by @0r-gh0 so can just successfully run the program files with required libraries, without creating a new Certificate.
+The Programs are pre-loaded with the Certificates made by ARGHA so can just successfully run the program files with required libraries, without creating a new Certificate.
 
 **If you want to Create Your Own Certificate then proceed with the following steps**
 
