@@ -2,16 +2,16 @@
 Scroll down the Manual for detailed instructions to Run the Program. 
 
 ## SETUP
-I have pre-loaded the program with my Certificates so one can just run the program without creating a new Certificate.
+The Programs are pre-loaded with the Certificates made by @0r-gh0 so can just successfully run the program files with required libraries, without creating a new Certificate.
 
-**If you want to Create Your Own Certificate then do the following steps**
+**If you want to Create Your Own Certificate then proceed with the following steps**
 
 ## Creating Environment
-1. Clone this Repo to your System
-2. Create a Directory/Folder name it *OpenSSL*
-3. Copy the Programs *SERVER_SSL.c* and *CLIENT_SSL.c*
+1. Clone/Download this Repository to your System
+2. reate a Directory/Folder and Name it `OpenSSL`
+3. Copy the Programs `SERVER_SSL.c` and `CLIENT_SSL.c`
 4. In the Same Directory Open Terminal in Admin Mode
-5. Admin Mode : `sudo su` enter credentials
+5. Admin Mode : `sudo su` and enter your credentials
 
 ## Install OpenSSL
 Check for your [OpenSSL](https://www.openssl.org/) Version : 
@@ -155,13 +155,14 @@ char KeyFile[] = "key/client.key";
 ```
 
 **NOTE : SSLv3 Has been depreciated** 
-*This Line :  method = SSLv3_client_method(); OR SSLv3_client_method();*
+
+*This Line :  `method = SSLv3_client_method()`; OR `SSLv3_client_method();`*
 
 > If Using Manmatha Sir's Program 
-> In Client Side function SSL_CTX* InitCTX(void) Replace with 
+> In Client Side function `SSL_CTX* InitCTX(void)` Replace with 
 > `method = TLS_client_method();`
 >
-> In Server Side function SSL_CTX* InitServerCTX(void) Replace with 
+> In Server Side function `SSL_CTX* InitServerCTX(void)` Replace with 
 > `method = TLS_server_method();`
 >
 > *Note : I have Updated Majorly in my Code So No Need to make any Change*
@@ -186,4 +187,47 @@ gcc -o server SERVER_SSL.c -lssl -lcrypto
 ```
 ./client
 ./server
+```
+
+---
+
+## Multi Client Setup
+
+## Functionalities
+1. Accept multiple client connections.
+2. Fork a new process for each client connection.
+3. Allow the client to send numbers or strings.
+4. Add `5` to a number if a number is received and return the result.
+5. Reflect the same text back if a string is received.
+6. Disconnect a client when it sends `-1`.
+
+## SETUP
+I have pre-loaded the program with my Certificates so one can just run the program without creating a new one.
+
+**If you want to Create Your Own Certificate then procede with the following steps**
+
+## Creating Environment
+1. Clone/Download this Repository to your System
+2. Create a Directory/Folder and Name it `MULTI_OpenSSL`
+3. Copy the Programs `MULTI_SERVER_OPENSSL.c` and `MULTI_CLIENT_OPENSSL.c`
+4. In the Same Directory Open Terminal in Admin Mode
+5. Admin Mode : `sudo su` and enter your credentials
+
+> Perform the Same Steps above to create a New Certificate or Run using the pre-loaded certificate.
+
+## Compile the Program 
+```
+gcc -o Mclient MULTI_SERVER_OPENSSL.c -lssl -lcrypto
+gcc -o Mserver MULTI_CLIENT_OPENSSL.c -lssl -lcrypto
+```
+
+## Run the program in Multiple terminals with Multiple Clients and a single Server
+```
+./client
+./server
+```
+
+```
+Raise a PR to Contribute 
+For any Query Contact : arghacious@gmail.com
 ```
