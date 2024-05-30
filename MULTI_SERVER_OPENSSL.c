@@ -8,7 +8,7 @@
 #include <openssl/err.h>
 #include <sys/wait.h>
 
-#define PORT 4433
+#define PORT 6969
 
 void init_openssl() {
     SSL_load_error_strings();
