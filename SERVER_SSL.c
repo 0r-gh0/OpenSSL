@@ -50,7 +50,17 @@ void configure_context(SSL_CTX *ctx) {
         fprintf(stderr, "Private key does not match the public certificate\n");
         exit(EXIT_FAILURE);
     }
+
+    /* Load and verify client certificates */
+    if (SSL_CTX_load_verify_locations(ctx, "key/ca.crt", NULL) <= 0) {
+        ERR_print_errors_fp(stderr);
+        exit(EXIT_FAILURE);
+    }
+
+    SSL_CTX_set_verify(ctx, SSL_VERIFY_PEER | SSL_VERIFY_FAIL_IF_NO_PEER_CERT, NULL);
+    SSL_CTX_set_verify_depth(ctx, 4);
 }
+
 
 void handle_client(SSL *ssl) {
     const int read_size = 1024;
