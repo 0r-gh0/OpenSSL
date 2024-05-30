@@ -159,13 +159,13 @@ char KeyFile[] = "key/client.key";
 *This Line :  `method = SSLv3_client_method()`; OR `SSLv3_client_method();`*
 
 > If Using Manmatha Sir's Program 
-> In Client Side function `SSL_CTX* InitCTX(void)` Replace with 
-> `method = TLS_client_method();`
+> In Client Side function `SSL_CTX* InitCTX(void)` 
+> Replace with `method = TLS_client_method();`
 >
-> In Server Side function `SSL_CTX* InitServerCTX(void)` Replace with 
-> `method = TLS_server_method();`
+> In Server Side function `SSL_CTX* InitServerCTX(void)`
+> Replace with `method = TLS_server_method();`
 >
-> *Note : I have Updated Majorly in my Code So No Need to make any Change*
+> *Note : I have updated majority part of Manmatha Sir's Code and found out it worked *successfully* so *NO* need to make any extra changes*
 
 ### Enter the Admin Mode
 ```
@@ -204,8 +204,6 @@ gcc -o server SERVER_SSL.c -lssl -lcrypto
 ## SETUP
 I have pre-loaded the program with my Certificates so one can just run the program without creating a new one.
 
-**If you want to Create Your Own Certificate then procede with the following steps**
-
 ## Creating Environment
 1. Clone/Download this Repository to your System
 2. Create a Directory/Folder and Name it `MULTI_OpenSSL`
@@ -227,7 +225,20 @@ gcc -o Mserver MULTI_CLIENT_OPENSSL.c -lssl -lcrypto
 ./server
 ```
 
+**NOTE : SSLv3 Has been depreciated** 
+
+*This Line :  `method = SSLv3_client_method()`; OR `SSLv3_client_method();`*
+
+> If Using Manmatha Sir's Program 
+> In Client Side function `SSL_CTX* InitCTX(void)` 
+> Replace with `method = SSLv23_server_method();`
+>
+> In Server Side function `SSL_CTX* InitServerCTX(void)`
+> Replace with `method = SSLv23_server_method();`
+>
+> *Note : I have updated majority part of Manmatha Sir's Code and found out it worked *successfully* so *NO* need to make any extra changes*
+
 ```
 Raise a PR to Contribute 
-For any Query Contact : arghacious@gmail.com
+For any Query Contact : `arghacious@gmail.com`
 ```
